@@ -1,0 +1,52 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Recipes" %>
+
+<h1>Recipes</h1>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "Recipes", recipes_path, class: "nav-link" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, method: "delete", class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="col">Title</th>
+      <th class="col">Cook time</th>
+      <th class="col">Difficulty</th>
+      <th></th>
+  <thead>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.title %></td>
+        <td><%= recipe.cook_time %></td>
+        <td><%= recipe.difficulty %></td>
+        <td><%= link_to "show recipe", recipe %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+<% if user_signed_in? %>
+  <%= link_to "New recipe", new_recipe_path %>
+<% end %>
