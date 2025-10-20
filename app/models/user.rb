@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :recipes
+
+  enum :role, { regular: 0, admin: 1 }, default: :regular, scopes: false
 end
