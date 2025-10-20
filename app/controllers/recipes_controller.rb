@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_recipe, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, only: %i[ create edit update destroy new ]
 
